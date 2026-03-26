@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
             Kokkos::Max<double>(max_x)
         );
 
-        std::cout << "max of x_i" << max_x << std::endl;
+        std::cout << "max of x_i: " << max_x << std::endl;
 
     }
     Kokkos::finalize();
