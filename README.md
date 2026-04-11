@@ -47,7 +47,7 @@ cd kokkos_imadalab
 ```bash
 mkdir build
 cd build
-cmake .. -DKokkos_ROOT=$HOME/kokkos-install
+cmake ..
 make
 ```
 `sample`という実行ファイルができていれば成功。実行すると計算結果が表示される。
