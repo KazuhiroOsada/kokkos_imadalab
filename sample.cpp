@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
             "sum", N, KOKKOS_LAMBDA(int i, double& local_sum) {
                 local_sum += x(i);
             },
-        sum
+            sum
         );
 
         std::cout << "sum of x_i: " << sum << std::endl;
