@@ -2,6 +2,8 @@
 
 今田研究室のGPUサーバで、Kokkosライブラリを使用してGPU計算を始めるためのクイックスタートガイドです。
 
+**2026/4/11 Linux環境への移行に合わせて修正**
+
 ## 0. Kokkosとは
 
 [Kokkos](https://github.com/kokkos/kokkos)は並列計算のためのC++ライブラリの一つで、その特長は同じコードが異なる環境(CPU(OpenMP)でもGPU(CUDA)でも)で実行可能である点にある。
@@ -11,29 +13,23 @@
 
 ## 1. Kokkosのインストール
 
-WSLで作業する。使い方はマニュアルを参照。cmake等が入っているものを使うとよい。
-まずはgithubからKokkosをインストールする。
-最新版は要求が厳しいので、少し古いバージョンをインストールする。
+まずはgithubからKokkos(最新版(2026/4/11現在))をインストールする。
 ```bash
-git clone　-b 4.4.01 https://github.com/kokkos/kokkos.git
+cd ~
+git clone -b 5.1.0 https://github.com/kokkos/kokkos.git
 cd kokkos
-```
-必要なパッケージをインストールする。
-```bash
-wsl -u root
-sudo apt install nvidia-cuda-toolkit
-sudo apt install -y gcc-12 g++-12
 ```
 ビルドする。
 ```bash
 mkdir build
 cd build
 cmake .. \
-  -DCMAKE_CXX_COMPILER=g++-12 \
+  -DCMAKE_CXX_COMPILER=$PWD/../bin/nvcc_wrapper \
   -DKokkos_ENABLE_CUDA=ON \
+  -DKokkos_ENABLE_CUDA_LAMBDA=ON \
   -DKokkos_ENABLE_SERIAL=ON \
   -DKokkos_ARCH_ADA89=ON \
-  -DCMAKE_CXX_STANDARD=17 \
+  -DCMAKE_CXX_STANDARD=20 \
   -DCMAKE_INSTALL_PREFIX=$HOME/kokkos-install
 make
 make install
